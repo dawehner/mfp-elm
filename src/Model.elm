@@ -2,7 +2,6 @@ module Model exposing (..)
 
 import RemoteData exposing (WebData)
 
-
 type alias Model =
     { songs : WebData (List Song)
     , activeSong : Maybe Song
@@ -21,3 +20,5 @@ type Msg
     | SongsLoad
     | SongsFeedLoaded (WebData (List Song))
     | SelectSong Song
+    | SelectRandomSong
+

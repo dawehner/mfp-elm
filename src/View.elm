@@ -38,6 +38,7 @@ viewApp model =
         RemoteData.Success songs ->
             div []
                 [ Maybe.withDefault (text "No song selected") (Maybe.map viewPlayer model.activeSong)
+                , div [] [ a [ href "", onClickPreventDefault (SelectRandomSong) ] [ text "Play random song!" ] ]
                 , ul [] <|
                     List.map (\song -> li [] [ a [ href "", onClickPreventDefault (SelectSong song) ] [ text song.title ] ]) songs
                 ]
