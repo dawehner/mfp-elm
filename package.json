@@ -9,5 +9,9 @@
     "cors": "^2.8.3",
     "express": "^4.15.3",
     "feed-furious": "^1.0.0"
+  },
+  "scripts": {
+    "server": "node server.js &",
+    "dev": "yarn run server && elm-reactor"
   }
 }
