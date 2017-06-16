@@ -20,7 +20,10 @@ type alias Model =
 
 
 type alias Song =
-    { audioUrl : String }
+    { audioUrl : String
+    , description : String
+    , title : String
+    }
 
 
 type Msg
@@ -68,6 +71,8 @@ songDecoder : Decoder Song
 songDecoder =
     decode Song
         |> required "id" string
+        |> required "description" string
+        |> required "title" string
 
 
 songsDecoder : Decoder (List Song)
@@ -102,7 +107,7 @@ view model =
             div []
                 [ Maybe.withDefault (text "No song selected") (Maybe.map viewPlayer model.activeSong)
                 , ul [] <|
-                    List.map (\song -> li [ onClick (SelectSong song) ] [ text song.audioUrl ]) songs
+                    List.map (\song -> li [ onClick (SelectSong song) ] [ text song.title ]) songs
                 ]
 
         RemoteData.Failure err ->
@@ -111,12 +116,15 @@ view model =
 
 viewPlayer : Song -> Html Msg
 viewPlayer song =
-    audio
-        [ src song.audioUrl
-        , controls True
-        , autoplay True
+    div []
+        [ h2 [] [ text song.title ]
+        , audio
+            [ src song.audioUrl
+            , controls True
+            , autoplay True
+            ]
+            []
         ]
-        []
 
 
 main =
