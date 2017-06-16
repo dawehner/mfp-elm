@@ -1,0 +1,13 @@
+{
+  "name": "mfp-elm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "feed-furious": "^1.0.0"
+  }
+}

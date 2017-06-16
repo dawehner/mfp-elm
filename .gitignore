@@ -1,0 +1,4 @@
+*.swp
+elm-stuff
+node_modules
+.idea
