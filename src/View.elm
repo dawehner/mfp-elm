@@ -4,7 +4,8 @@ import RemoteData
 import Model exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (controls, src, autoplay, href)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onWithOptions)
+import Json.Decode
 
 
 view : Model -> Html Msg
@@ -13,6 +14,16 @@ view model =
         [ viewApp model
         , footer [] [ text "Music from ", a [ href "http://musicforprogramming.net/" ] [ text "musicforprogramming.net" ] ]
         ]
+
+
+onClickPreventDefault : msg -> Attribute msg
+onClickPreventDefault msg =
+    onWithOptions
+        "click"
+        { preventDefault = True
+        , stopPropagation = False
+        }
+        (Json.Decode.succeed msg)
 
 
 viewApp : Model -> Html Msg
@@ -28,7 +39,7 @@ viewApp model =
             div []
                 [ Maybe.withDefault (text "No song selected") (Maybe.map viewPlayer model.activeSong)
                 , ul [] <|
-                    List.map (\song -> li [ onClick (SelectSong song) ] [ text song.title ]) songs
+                    List.map (\song -> li [] [ a [ href "", onClickPreventDefault (SelectSong song) ] [ text song.title ] ]) songs
                 ]
 
         RemoteData.Failure err ->

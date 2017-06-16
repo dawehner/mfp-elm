@@ -6,11 +6,12 @@ import RemoteData
 import Json.Decode exposing (int, string, float, nullable, Decoder, list, at)
 import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
 
+
 getSongs : Cmd Msg
 getSongs =
     let
         url =
-            "http://localhost:3123/music"
+            "music.json"
     in
         Http.send RemoteData.fromResult (Http.get url fullDecoder)
             |> Cmd.map SongsFeedLoaded
@@ -53,4 +54,3 @@ fullDecoder =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
-
