@@ -12,7 +12,8 @@
   },
   "scripts": {
     "dev": "elm-live src/Main.elm --output=dist/main.js --pushstate --open --debug --dir=dist",
-    "build": "elm-make src/Main.elm --output=dist/main.js"
+    "build": "elm-make src/Main.elm --output=dist/main.js",
+    "deploy": "yarn run build && firebase deploy"
   },
   "devDependencies": {
     "elm": "^0.18.0",
