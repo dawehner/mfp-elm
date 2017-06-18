@@ -3,10 +3,11 @@ module Update exposing (update, subscriptions)
 import Http
 import Model exposing (..)
 import RemoteData
-import Json.Decode exposing (int, string, float, nullable, Decoder, list, at)
+import Json.Decode exposing (int, string, float, nullable, Decoder, list, field)
 import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
 import Random
 import List.Extra
+import Random.Extra
 
 
 getSongs : String -> Cmd Msg
@@ -18,17 +19,14 @@ getSongs url =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Noop ->
-            ( model, Cmd.none )
-
         SongsLoad ->
             ( { model | songs = RemoteData.Loading }, getSongs model.songsUrl )
 
         SongsFeedLoaded songs ->
             ( { model | songs = songs }, Cmd.none )
 
-        SelectSong song ->
-            ( { model | activeSong = Just song }, Cmd.none )
+        SelectSong maybeSong ->
+            ( { model | activeSong = maybeSong }, Cmd.none )
 
         SelectRandomSong ->
             case model.songs of
@@ -70,7 +68,7 @@ songsDecoder =
 
 fullDecoder : Decoder (List Song)
 fullDecoder =
-    at [ "items" ] songsDecoder
+    field "items" songsDecoder
 
 
 subscriptions : Model -> Sub Msg

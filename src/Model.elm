@@ -6,7 +6,7 @@ import RemoteData exposing (WebData)
 type alias Model =
     { songs : WebData (List Song)
     , activeSong : Maybe Song
-    , songsUrl: String
+    , songsUrl : String
     }
 
 
@@ -18,8 +18,7 @@ type alias Song =
 
 
 type Msg
-    = Noop
-    | SongsLoad
+    = SongsLoad
     | SongsFeedLoaded (WebData (List Song))
-    | SelectSong Song
+    | SelectSong (Maybe Song)
     | SelectRandomSong
