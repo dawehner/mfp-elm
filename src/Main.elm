@@ -8,16 +8,8 @@ import View exposing (view)
 import Update exposing (update, subscriptions)
 
 
--- MODEL
-
-
 init =
-    update SongsLoad { songs = RemoteData.NotAsked, activeSong = Nothing }
-
-
-
--- UPDATE
--- VIEW
+    update SongsLoad { songs = RemoteData.NotAsked, activeSong = Nothing, songsUrl = "music.json" }
 
 
 main =

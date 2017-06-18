@@ -9,14 +9,10 @@ import Random
 import List.Extra
 
 
-getSongs : Cmd Msg
-getSongs =
-    let
-        url =
-            "music.json"
-    in
-        Http.send RemoteData.fromResult (Http.get url fullDecoder)
-            |> Cmd.map SongsFeedLoaded
+getSongs : String -> Cmd Msg
+getSongs url =
+    Http.send RemoteData.fromResult (Http.get url fullDecoder)
+        |> Cmd.map SongsFeedLoaded
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -26,7 +22,7 @@ update msg model =
             ( model, Cmd.none )
 
         SongsLoad ->
-            ( { model | songs = RemoteData.Loading }, getSongs )
+            ( { model | songs = RemoteData.Loading }, getSongs model.songsUrl )
 
         SongsFeedLoaded songs ->
             ( { model | songs = songs }, Cmd.none )
