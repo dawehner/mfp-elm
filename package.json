@@ -13,6 +13,6 @@
   "scripts": {
     "server": "node server.js &",
     "dev": "yarn run server && elm-reactor",
-    "build": "elm-make src/Main.elm --output=main.js"
+    "build": "elm-make src/Main.elm --output=dist/main.js"
   }
 }
