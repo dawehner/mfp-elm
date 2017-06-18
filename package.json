@@ -11,8 +11,11 @@
     "feed-furious": "^1.0.0"
   },
   "scripts": {
-    "server": "node server.js &",
-    "dev": "yarn run server && elm-reactor",
+    "dev": "elm-live src/Main.elm --output=dist/main.js --pushstate --open --debug --dir=dist",
     "build": "elm-make src/Main.elm --output=dist/main.js"
+  },
+  "devDependencies": {
+    "elm": "^0.18.0",
+    "elm-live": "^2.7.4"
   }
 }
