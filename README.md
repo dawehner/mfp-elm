@@ -1,7 +1,6 @@
 # Music for programming
 
-This APP provides a simple interface to listen to various musicforprogramming.net music,
-which is music which is nice to listen to in the background.
+This APP provides a simple interface to listen to various musicforprogramming.net music, nice to listen to in the background.
 
 ## Architecture
 
