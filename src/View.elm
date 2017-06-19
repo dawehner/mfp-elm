@@ -4,7 +4,7 @@ import RemoteData
 import Model exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (controls, src, autoplay, href)
-import Html.Events exposing (onClick, onWithOptions)
+import Html.Events exposing (onClick, onWithOptions, on)
 import Json.Decode
 
 
@@ -55,6 +55,7 @@ viewPlayer song =
             [ src song.audioUrl
             , controls True
             , autoplay True
+            , on "ended" (Json.Decode.succeed SelectRandomSong)
             ]
             []
         ]

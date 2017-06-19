@@ -31,26 +31,10 @@ update msg model =
         SelectRandomSong ->
             case model.songs of
                 RemoteData.Success songs ->
-                    ( model, Random.generate SelectSong (randomSong songs) )
+                    ( model, Random.generate SelectSong (Random.Extra.sample songs) )
 
                 _ ->
                     ( model, Cmd.none )
-
-
-randomSong : List Song -> Random.Generator Song
-randomSong songs =
-    let
-        length =
-            List.length songs
-    in
-        Random.int 0 (length - 1)
-            |> Random.map
-                (\int ->
-                    List.Extra.getAt int songs
-                        -- Is there a better way to ensure that there is at least one of the songs returned.
-                        |>
-                            Maybe.withDefault { audioUrl = "", title = "", description = "" }
-                )
 
 
 songDecoder : Decoder Song
