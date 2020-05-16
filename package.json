@@ -5,7 +5,7 @@
   "repository": {},
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.18.1",
     "cors": "^2.8.3",
     "express": "^4.15.3",
     "feed-furious": "^1.0.0"
