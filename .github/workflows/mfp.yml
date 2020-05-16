@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: cachix/install-nix-action@v7
-        name: Install nix
+        name: Build project
       - run: make build
       - uses: jsmrcaga/action-netlify-deploy@master
         with:
