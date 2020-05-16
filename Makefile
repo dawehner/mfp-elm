@@ -1,5 +1,2 @@
-dist/music.json:
-	cp src/music.json dist/music.json
-
-build: dist/music.json
+build:
 	nix-shell -p elmPackages.elm nodejs-10_x --command "./build.sh"
