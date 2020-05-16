@@ -1,11 +1,11 @@
 module View exposing (view)
 
-import RemoteData
-import Model exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (controls, src, autoplay, href)
-import Html.Events exposing (onClick, onWithOptions, on)
+import Html.Attributes exposing (autoplay, controls, href, src)
+import Html.Events exposing (on, onClick)
 import Json.Decode
+import Model exposing (..)
+import RemoteData
 
 
 view : Model -> Html Msg
@@ -15,16 +15,15 @@ view model =
         , footer [] [ text "Music from ", a [ href "http://musicforprogramming.net/" ] [ text "musicforprogramming.net" ] ]
         ]
 
+alwaysPreventDefault : msg -> ( msg, Bool )
+alwaysPreventDefault msg =
+  ( msg, True )
 
 onClickPreventDefault : msg -> Attribute msg
 onClickPreventDefault msg =
-    onWithOptions
-        "click"
-        { preventDefault = True
-        , stopPropagation = False
-        }
-        (Json.Decode.succeed msg)
-
+    Html.Events.preventDefaultOn "click" (
+        (Json.Decode.succeed (msg, True))
+    )
 
 viewApp : Model -> Html Msg
 viewApp model =
@@ -38,7 +37,7 @@ viewApp model =
         RemoteData.Success songs ->
             div []
                 [ Maybe.withDefault (text "No song selected") (Maybe.map viewPlayer model.activeSong)
-                , div [] [ a [ href "", onClickPreventDefault (SelectRandomSong) ] [ text "Play random song!" ] ]
+                , div [] [ a [ href "", onClickPreventDefault SelectRandomSong ] [ text "Play random song!" ] ]
                 , ul [] <|
                     List.map (\song -> li [] [ a [ href "", onClickPreventDefault (SelectSong (Just song)) ] [ text song.title ] ]) songs
                 ]
