@@ -1,14 +1,13 @@
 module Main exposing (main)
 
-import Html
-import Http
+import Browser
 import Model exposing (..)
-import RemoteData exposing (RemoteData, WebData)
+import RemoteData exposing (RemoteData(..))
 import Update exposing (subscriptions, update)
 import View exposing (view)
-import Browser
 
-init : () -> (Model, Cmd Msg)
+
+init : () -> ( Model, Cmd Msg )
 init _ =
     update SongsLoad { songs = RemoteData.NotAsked, activeSong = Nothing, songsUrl = "music.json" }
 

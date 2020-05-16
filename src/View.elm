@@ -2,7 +2,7 @@ module View exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (autoplay, controls, href, src)
-import Html.Events exposing (on, onClick)
+import Html.Events exposing (on)
 import Json.Decode
 import Model exposing (..)
 import RemoteData
@@ -15,15 +15,12 @@ view model =
         , footer [] [ text "Music from ", a [ href "http://musicforprogramming.net/" ] [ text "musicforprogramming.net" ] ]
         ]
 
-alwaysPreventDefault : msg -> ( msg, Bool )
-alwaysPreventDefault msg =
-  ( msg, True )
 
 onClickPreventDefault : msg -> Attribute msg
 onClickPreventDefault msg =
-    Html.Events.preventDefaultOn "click" (
-        (Json.Decode.succeed (msg, True))
-    )
+    Html.Events.preventDefaultOn "click"
+        (Json.Decode.succeed ( msg, True ))
+
 
 viewApp : Model -> Html Msg
 viewApp model =

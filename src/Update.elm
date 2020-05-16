@@ -1,9 +1,8 @@
 module Update exposing (subscriptions, update)
 
 import Http
-import Json.Decode exposing (Decoder, field, float, int, list, nullable, string, succeed)
-import Json.Decode.Pipeline exposing (hardcoded, optional, required)
-import List.Extra
+import Json.Decode exposing (Decoder, field, list, string, succeed)
+import Json.Decode.Pipeline exposing (required)
 import Model exposing (..)
 import Random
 import Random.Extra
@@ -12,10 +11,11 @@ import RemoteData
 
 getSongs : String -> Cmd Msg
 getSongs url =
-    Http.get {
-        url = url
+    Http.get
+        { url = url
         , expect = Http.expectJson (RemoteData.fromResult >> SongsFeedLoaded) fullDecoder
-    }
+        }
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
