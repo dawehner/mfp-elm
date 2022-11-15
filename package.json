@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "copy-webpack-plugin": "^6.0.1",
-    "loader-utils": "^2.0.0",
+    "loader-utils": "^2.0.4",
     "webpack-dev-server": "^3.11.0",
     "write-file-webpack-plugin": "^4.5.1"
   }
